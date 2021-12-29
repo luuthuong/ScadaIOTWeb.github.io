@@ -1,0 +1,728 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="Style.css">
+    <script src="node_modules/chart.js/dist/chart.js"></script>
+    <script src="Script.js"></script>
+
+    <title>Hệ Thống Vườn Thông Minh </title>
+</head>
+
+<body>
+    <!-- nav bar -->
+    <header class="header">
+        <div class="logo-header">
+            <a href="#" class="logo">
+                <img style="height: 130px;" src="Image/Logo.jfif" alt="" srcset="">
+            </a>
+            <div class="header-text">
+                <h1>HỆ THỐNG GIÁM SÁT VƯỜN THÔNG MINH </h1>
+
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <!-- <a href="#home">Trang chủ</a> -->
+            <a href="index.html">Giới Thiệu</a>
+            <a href="#System">Hệ thống</a>
+            <a onclick="showtime()" href="#history">Lịch sử</a>
+            <a id="if" href="#contact">Thông tin</a>
+        </nav>
+    </header>
+    <!-- end nav bar -->
+    <!-- Main -->
+    <div class="dp-sensor">
+        <div class="column">
+            <div class="card">
+                <div class="gauge_humi">
+                    <div class="gauge__body">
+                        <div class="gauge__fill"></div>
+                        <div class="gauge__cover"></div>
+                    </div>
+                </div>
+                <div class="title-gauge">
+                    <div class="content-ss">
+                        <div>Nhiệt độ không khí</div>
+                        <div class="content-main">
+                            <span id="actTemp">Hiện tại:</span>
+                            <span id="actTh">Mức cao:</span>
+                            <span id="actTl">Mức thấp:</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <div class="gauge_inten">
+                    <div class="gauge__body">
+                        <div class="gauge__fill"></div>
+                        <div class="gauge__cover"></div>
+                    </div>
+                </div>
+                <div class="title-gauge">
+                    <div class="content-ss">
+                        <div>Độ ẩm đất</div>
+                        <div class="content-main">
+                            <span id="actSoil">Hiện tại:</span>
+                            <span id="actSh">Mức cao:</span>
+                            <span id="actSl">Mức thấp:</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <div class="gauge_temp">
+                    <div class="gauge__body">
+                        <div class="gauge__fill"></div>
+                        <div class="gauge__cover"></div>
+                    </div>
+                </div>
+                <div class="title-gauge">
+                    <div class="content-ss">
+                        <div>Cường độ ánh sáng</div>
+                        <div class="content-main">
+                            <span id="actLight">Hiện tại:</span>
+                            <div id="actLh">Mức cao:</div>
+                            <span id="actLl">Mức thấp:</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="gauge_temp">
+                    <div class="gauge__body  gauge-wheather">
+                        <img id="sttWt" class="img-wheather" src="Image/sun.png" alt="">
+                    </div>
+
+                </div>
+                <div class="title-gauge">
+                    <div class="content-ss  ">
+                        <div class="content-wheather">Thời tiết<td></td>
+                        </div>
+                        <div class="content-main wheather">
+                            <span id="actRain">Hiện tại:</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart">
+        <div class="temp">
+            <canvas id="chartTemperature"></canvas>
+        </div>
+        <div class="Humi">
+            <canvas id="chartHumidity"></canvas>
+        </div>
+        <div class="Inten">
+            <canvas id="chartIntensity"></canvas>
+        </div>
+    </div>
+    <div class="control-panel">
+        <div class="light-display">
+            <h1>CONTROL PANEL</h1>
+            <div class="ctrl-main">
+                <div id="mode" class="circle-light ledmode">
+                    <span >MODE</span>
+                </div>
+                <div id="temp" class="circle-light ledtemp">
+                    <span > Temp</span>
+                </div>
+                <div  id="humi" class="circle-light ledhumi">
+                    <span>Humi</span>
+                </div>
+                <div id="iten" id="lediten" class="circle-light ledinten">
+                    <span >Inten</span>
+                </div>
+            </div>
+            <div class="device-ctrl">
+                <img id="pump" draggable="false" src="Image/pumpoff.png" alt="" class="pump">
+                <img id="fan" draggable="false" src="Image/fanoff.png" alt="" class="fan">
+                <img id="lamp" draggable="false" src="Image/lampoff.png" alt="" class="lamp">
+                <img id="warm" draggable="false" src="Image/warmoff.png" alt="" class="warm">
+                <img id="motor" draggable="false" src="Image/motoroff.png" alt="" class="motor">
+                </div>
+
+                <div class="btn-slmode">
+                    <span class="btn-mode">
+                        <h3>Auto</h3>
+                        <label for="btmode" class="toggle-label">
+                            <input onclick="checkmode()" type="checkbox" name="" id="btmode">
+                            <div class="toggle">
+                                <div class="spinner"> </div>
+                            </div>
+                        </label>
+                        <h3>Manual</h3>
+                    </span>
+                </div>
+            <div class="form-sp">
+                <div class="form-child">
+                    <div class="header-child">
+                        <h2>Nhiệt độ</h2>
+                    </div>
+                    <div class="child-main">
+                        <div class="input-fill">
+                            <div class="form-field sptemp-high">
+                                <input id="tempHigh" type="text" class="form-input" placeholder=" ">
+                                <label for="name" class="form-label">HIGH </label>
+                            </div>
+                            <div class="form-field sptemp-low">
+                                <input id="tempLow" type="text" class="form-input" placeholder=" ">
+                                <label for="name" class="form-label">LOW </label>
+                            </div>
+                        </div>
+
+                        <div class="input-enter">
+                            <button id="setTemp" class="btn-enter btn-efleft">SET</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-child form-child-between">
+                    <div class="header-child">
+                        <h2>Độ Ẩm</h2>
+                    </div>
+                    <div class="child-main">
+                        <div class="input-fill">
+                            <div class="form-field sptemp-high">
+                                <input id="soilHigh" type="text" class="form-input" placeholder=" ">
+                                <label for="name" class="form-label">HIGH </label>
+                            </div>
+                            <div class="form-field sptemp-low">
+                                <input id="soilLow" type="text" class="form-input" placeholder=" ">
+                                <label for="name" class="form-label">LOW </label>
+                            </div>
+                        </div>
+
+                        <div class="input-enter">
+                            <button id="setSoil" class="btn-enter btn-efleft">SET</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-child">
+                    <div class="header-child">
+                        <h2>Cường Độ Ánh Sáng</h2>
+                    </div>
+                    <div class="child-main">
+                        <div class="input-fill">
+                            <div class="form-field sptemp-high">
+                                <input id="lightHigh" type="text" class="form-input" placeholder=" ">
+                                <label for="name" class="form-label">HIGH </label>
+                            </div>
+                            <div class="form-field sptemp-low">
+                                <input id="lightLow" type="text" class="form-input" placeholder=" ">
+                                <label for="name" class="form-label">LOW </label>
+                            </div>
+                        </div>
+
+                        <div class="input-enter">
+                            <button id="setLight" class="btn-enter btn-efleft" >SET</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button Controls in ManualMode -->
+    <div id="btn-ctrl" class="button-ctrl">
+<div id="child-left" class=" left">
+    <div class="form-child control-pump">
+        <div class="header-child">
+            <h2>Máy Bơm</h2>
+        </div>
+        <div class="child-main">
+            <img class="pump" id="pumpman" draggable="false" src="Image/pumpon.png" alt="">
+            <span class="btn-mode btman">
+                <div class="btn-main">
+                    <h3>OFF</h3>
+                    <label for="btnpump" class="toggle-label btnman">
+                        <input type="checkbox" name="" id="btnpump">
+                        <div class="toggle toggle-man">
+                            <div class="spinner"> </div>
+                        </div>
+                    </label>
+                    <h3>ON</h3>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <div class="form-child control-motor">
+        <div class="header-child">
+            <h2>Mái che</h2>
+        </div>
+        <div class="child-main">
+            <img class="motor" id="motorman" src="Image/motoroff.png" alt="">
+            <div class="btn-mode btman">
+                <div class="btn-main">
+                    <h3>OFF</h3>
+                    <label for="btnmotor" class="toggle-label btnman">
+                        <input type="checkbox" name="" id="btnmotor">
+                        <div class="toggle toggle-man">
+                            <div class="spinner"> </div>
+                        </div>
+                    </label>
+                    <h3>ON</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="child-right" class="right">
+    <div class="form-child control-pump">
+        <div class="header-child">
+            <h2>Quạt</h2>
+        </div>
+        <div class="child-main">
+            <img class="pump" id="fanman" src="Image/fanoff.png" alt="">
+            <div class="btn-mode btman">
+                <div class="btn-main">
+                    <h3>OFF</h3>
+                    <label for="btnfan" class="toggle-label btnman">
+                        <input type="checkbox" name="" id="btnfan">
+                        <div class="toggle toggle-man">
+                            <div class="spinner"> </div>
+                        </div>
+                    </label>
+                    <h3>ON</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-child control-motor">
+        <div class="header-child">
+            <h2>Chiếu sáng</h2>
+        </div>
+        <div class="child-main">
+            <img class="pump" id="lampman" src="Image/lampoff.png" alt="">
+            <div class="btn-mode btman">
+                <div class="btn-main">
+                    <h3>OFF</h3>
+                    <label for="btnlamp" class="toggle-label btnman">
+                        <input type="checkbox" name="" id="btnlamp">
+                        <div class="toggle toggle-man">
+                            <div class="spinner"> </div>
+                        </div>
+                    </label>
+                    <h3>ON</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-child control-motor">
+        <div class="header-child">
+            <h2>Sưởi</h2>
+        </div>
+        <div class="child-main">
+            <img class="pump" id="warmman" src="Image/warmoff.png" alt="">
+            <div class="btn-mode btman">
+                <div class="btn-main">
+                    <h3>OFF</h3>
+                    <label for="btnwarm" class="toggle-label btnman">
+                        <input type="checkbox" name="" id="btnwarm">
+                        <div class="toggle toggle-man">
+                            <div class="spinner"> </div>
+                        </div>
+                    </label>
+                    <h3>ON</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</body>
+<script>
+    const gaugeHumi = document.querySelector(".gauge_humi");
+    const gaugeInten = document.querySelector(".gauge_inten");
+    const gaugeTemp = document.querySelector(".gauge_temp");
+
+    function setGaugeValue(gauge,per, value,key) {
+        if (value < 0 || value > 1) {
+            return;
+        }
+        // `${Math.round(value * per)}`
+        gauge.querySelector(".gauge__fill").style.transform = `rotate(${value / 2}turn)`;
+        gauge.querySelector(".gauge__cover").innerHTML =`${Math.round(value * per)}`+key;
+    }
+    
+
+    setInterval(() => {
+        let x=parseInt(document.getElementById('actTemp').textContent.substring(9));
+        let y=parseInt(document.getElementById('actSoil').textContent.substring(9));
+        let z=parseInt(document.getElementById('actLight').textContent.substring(9));
+        setGaugeValue(gaugeHumi,100, x/100,' &#8451;');
+        setGaugeValue(gaugeInten,100,y/100,' %');
+        setGaugeValue(gaugeTemp,1000, z/1000,' lux');
+    }, 300);
+
+function checkmode(){
+    var width_sc=screen.width;
+    if(document.getElementById("btmode").checked==true){
+            document.getElementById("btn-ctrl").style.display="flex";
+            setTimeout(()=>{
+                if(width_sc<=1440){
+                    document.getElementById("child-right").style.transition="transform .5s";
+                    document.getElementById("child-left").style.transition="transform .5s";
+                    document.getElementById("child-right").style.transform = `translateY(-680px)`;
+                    document.getElementById("child-left").style.transform = "translateY(-680px)";
+                }
+                else{
+                    document.getElementById("child-right").style.transition="transform .5s";
+                    document.getElementById("child-left").style.transition="transform .5s";
+                    document.getElementById("child-right").style.transform = `translate(-1500px,-680px)`;
+                    document.getElementById("child-left").style.transform = "translate(1500px,-680px)";
+                }
+            },200);
+        }
+    else {
+        document.getElementById("child-right").style.transform = "none"; 
+        document.getElementById("child-left").style.transform = "none";  
+        setTimeout(()=>{
+            document.getElementById("btn-ctrl").style.display="none";
+        },200);
+    }
+}
+
+</script>
+
+<script>
+    const ctx1 = document.getElementById('chartTemperature').getContext('2d');
+    const ctx2 = document.getElementById('chartHumidity').getContext('2d');
+    const ctx3 = document.getElementById('chartIntensity').getContext('2d');
+    const mychart1 = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                spanGaps: true,
+                label: 'NHIỆT ĐỘ',
+                data: [],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1.5,
+                pointHoverRadius: 10,
+                borderJoinStyle: 'miter',
+                lineTension: 0,
+            }]
+        },
+        options: {
+            layout: {
+                padding: {
+                    left: 10
+                }
+            }
+        },
+        scales: {
+            x: {
+                display: true
+            },
+            y: {
+                display: true
+            }
+        }
+    });
+
+    const mychart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                spanGaps: true,
+                label: 'ĐỘ ẨM ĐẤT',
+                data: [],
+                backgroundColor: [
+                    ' rgba(118, 161, 87,0.2)'
+                ],
+                borderColor: [
+                    ' rgba(118, 161, 87,1)'
+                ],
+                borderWidth: 1.5,
+                pointHoverRadius: 10,
+                borderJoinStyle: 'miter',
+                lineTension: 0,
+            }]
+        },
+        options: {
+            layout: {
+                padding: {
+                    left: 10
+                }
+            }
+        },
+        responsive: true,
+        scales: {
+            x: {
+                display: true
+            },
+            y: {
+                display: true
+            }
+        }
+    });
+
+    const mychart3 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                spanGaps: true,
+                label: 'CƯỜNG ĐỘ ÁNH SÁNG',
+                data: [],
+                backgroundColor: [
+                    'rgba(173, 170, 85, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(173, 170, 85, 1)',
+                ],
+                borderWidth: 1.5,
+                pointHoverRadius: 10,
+                borderJoinStyle: 'miter',
+                lineTension: 0,
+            }]
+        },
+        options: {
+            layout: {
+                padding: {
+                    left: 10
+                }
+            }
+        },
+        scales: {
+            x: {
+                display: true
+            },
+            y: {
+                display: true
+            }
+        }
+    });
+  
+    updateData(mychart1,'actTemp');
+    updateData(mychart2,'actSoil');
+    updateData(mychart3,'actLight');
+    let count = 0;
+    function updateData(chart,data) {
+        setInterval(() => {
+            let hours = (new Date).getHours();
+            let minute = (new Date).getMinutes();
+            let seconds = (new Date).getSeconds();
+            let time = hours + ":" + minute + ":" + seconds;
+            let value=parseInt(document.getElementById(data).textContent.substring(9));
+            addData(chart, time, value);
+            count++;
+            if (count > 40) {
+            removeData(chart);
+            }
+        }, 2000);
+    }
+
+    function addData(chart, label, data) {
+        chart.data.labels.push(label);
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.push(data);
+        });
+        chart.update();
+    }
+
+    function removeData(chart) {
+        chart.data.labels.shift();
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.shift();
+        });
+        chart.update();
+    }
+</script>
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+    
+    const firebaseConfig = {
+    apiKey: "AIzaSyCHJuYM58Zlpa0r98AgAd4LhJHAIyouWLA",
+    authDomain: "scada-a6149.firebaseapp.com",
+    databaseURL: "https://scada-a6149-default-rtdb.firebaseio.com",
+    projectId: "scada-a6149",
+    storageBucket: "scada-a6149.appspot.com",
+    messagingSenderId: "1022268780215",
+    appId: "1:1022268780215:web:b68855223e34b816002732",
+    measurementId: "G-CGQ7ZFND4S"
+    };
+ // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const database=getDatabase(app);
+    const auth=getAuth(app);
+setLight.addEventListener('click',(e)=>{
+setLimit('Light','lightHigh','lightLow');
+});
+setSoil.addEventListener('click',(e)=>{
+setLimit('Soil','soilHigh','soilLow');
+});
+setTemp.addEventListener('click',(e)=>{
+setLimit('Temperature','tempHigh','tempLow');
+});
+
+
+//Function Write
+function setLimit(path,vlhigh,vlLow) {
+    var High=parseInt(document.getElementById(vlhigh).value);
+    var Low=parseInt(document.getElementById(vlLow).value);
+    if(Number.isInteger(High)&&Number.isInteger(Low)){
+        set(ref(database, 'Setting/'+path), {
+    HIGH: High,
+    LOW: Low,
+    });
+    alert("Cài đặt giá trị thành công");
+    }
+    else{
+        alert("Giá trị nhập không hợp lệ\nVui lòng kiểm tra lại");
+    }
+   
+}
+//Function Read Value Setting 
+function ReadValueSetting(path,idh,idl){
+    const read=ref(database,path);
+    onValue(read,(snapshot)=>{
+        const data=snapshot.val();
+        document.getElementById(idh).innerHTML='Mức cao: '+data.HIGH;
+        document.getElementById(idl).innerHTML='Mức thấp: '+data.LOW;
+    });
+}
+//Function Read Value Sensor
+function ReadActValueSS(id,path){
+    const read=ref(database,'ActValue/Sensor/'+path);
+    onValue(read,(snapshot)=>{
+        const data=snapshot.val();
+        if(id=='actRain'){
+        let str=data.toString();
+        if(data.indexOf('r0')>=0){
+        document.getElementById('sttWt').src='/Image/sun.png';
+        document.getElementById('actRain').innerHTML='Hiện tại: '+"Not Rain";
+        }
+        else if(data.indexOf('r1')>=0){
+        document.getElementById('sttWt').src='/Image/rain.png';
+        document.getElementById(id).innerHTML='Hiện tại: '+'Rain';
+        }
+        }
+        else{
+        document.getElementById(id).innerHTML='Hiện tại: '+data;
+        }
+    })
+}
+//Function Read Value Device
+function ReadActDevice(path,id,srcon,srcoff){
+    var read=ref(database,'ActValue/Device/'+path);
+    onValue(read,(snapshot)=>{
+    const data=snapshot.val();
+    if(data.indexOf('On')>=0){
+    document.getElementById(id).src=srcon;
+    }
+    else if(data.indexOf('Off')>=0){
+    document.getElementById(id).src=srcoff;
+    }
+    });
+}
+
+// Function Status Lamp sensor
+function sttSensor(index_sensor,index_limit,id){
+    // Data value of Sensor , index: 0:Light 1:Rain 2:Soil 3:Temperature
+    const read=ref(database,'/ActValue/Sensor');
+    const rdt=new Array();
+    onValue(read,(snapshot)=>{
+    snapshot.forEach(function(element){
+    rdt.push(element.val());
+    });
+    });
+
+    //Data Setting limit ,index 0:Light 1:Soil 2:Temperature
+    const read1=ref(database,'/Setting/');
+    const rdt1=new Array();
+    onValue(read1,(snapshot1)=>{
+    snapshot1.forEach(function(element){
+    rdt1.push(element.val());
+    });
+    });
+
+    if(parseInt(rdt[index_sensor])<parseInt(rdt1[index_limit].LOW)){
+        document.getElementById(id).style.background='linear-gradient(to bottom, #2193b0, #6dd5ed)' ; } else
+        if(parseInt(rdt[index_sensor])>parseInt(rdt1[index_limit].HIGH)){
+        document.getElementById(id).style.background='linear-gradient(to bottom, #ed213a, #93291e)';
+        }
+        else{
+        document.getElementById(id).style.background='linear-gradient(to bottom, #799f0c, #acbb78)';
+        }
+}
+
+function ctrl_Man(idbtn,path,idimg,keysymbol){
+    if(document.getElementById(idbtn).checked == true){
+        set(ref(database,'/Manual/'+path),"On");
+        document.getElementById(idimg).src=`Image/${keysymbol}on.png`;
+    }
+    else{
+        set(ref(database,'/Manual/'+path),"Off");
+        document.getElementById(idimg).src=`Image/${keysymbol}off.png`;
+    }
+}
+
+setInterval(()=>{
+    ReadValueSetting('Setting/Light','actLh','actLl');
+    ReadValueSetting('Setting/Temperature','actTh','actTl');
+    ReadValueSetting('Setting/Soil','actSh','actSl');
+    ReadActValueSS('actTemp','Temperature');
+    ReadActValueSS('actSoil','Soil');
+    ReadActValueSS('actLight','Light');
+    ReadActValueSS('actRain','Rain');
+
+    ReadActDevice('Pump','pump','Image/pumpon.png','Image/pumpoff.png')
+    ReadActDevice('Motor','motor','Image/motoron.png','Image/motoroff.png')
+    ReadActDevice('Lamp','lamp','Image/lampon.png','Image/lampoff.png')
+    ReadActDevice('LampHeating','warm','Image/warmon.png','Image/warmoff.png')
+    ReadActDevice('Fan','fan','Image/fanon.png','Image/fanoff.png')
+
+    if(document.getElementById('btmode').checked == true){
+    set(ref(database,'ActValue/Mode'),"Manual");
+    document.getElementById('mode').style.background= 'linear-gradient(to right, #f7971e, #ffd200)';
+    }
+    else{
+    set(ref(database,'ActValue/Mode'),"Auto");
+    document.getElementById('mode').style.background= 'linear-gradient(to bottom, #11998e, #38ef7d)';
+    }
+
+    sttSensor(0,0,'iten');
+    sttSensor(2,1,'humi');
+    sttSensor(3,2,'temp');
+    ctrl_Man('btnfan','Fan','fanman','fan');
+    ctrl_Man('btnlamp','Lamp','lampman','lamp');
+    ctrl_Man('btnwarm','LampHeating','warmman','warm');
+    ctrl_Man('btnmotor','Motor','motorman','motor');
+    ctrl_Man('btnpump','Pump','pumpman','pump');
+},200);
+    </script>
+</html>
