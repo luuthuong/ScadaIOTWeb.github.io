@@ -1,6 +1,6 @@
 # ScadaIOTWeb.github.io
 
-## visit:https://scada-a6149.web.app/ to view detail
+## Visit:https://scada-a6149.web.app/ to view detail
 ### user: group8scada@gmail.com
 ### pass: 12345678
 
