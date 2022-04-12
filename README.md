@@ -5,7 +5,7 @@
 ### pass: 12345678
 
 # Resource
-- ChartJS: chartjs.org
+- ChartJS: https://chartjs.org
 
 ![image](https://user-images.githubusercontent.com/86012214/156596229-07733717-520c-41f6-8836-d9cc417006c8.png)
 ![image](https://user-images.githubusercontent.com/86012214/156596263-a7afc096-e633-4304-94aa-6efff3a34b5f.png)
